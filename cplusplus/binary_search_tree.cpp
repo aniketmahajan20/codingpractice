@@ -6,6 +6,8 @@ Will Contain the Follwoing functions:
 - void printPreOrder();
 - void printPostOrder(); */
 #include <iostream>
+#include <queue>
+
 using namespace std;
 class Node{
 private:
@@ -15,6 +17,7 @@ private:
 public:
     Node(int data){
         this->data = data;
+        left = right = NULL;
     }
     void insert(int value){
         if (value <= data){
@@ -77,6 +80,31 @@ public:
         }
     }
 
+    void printPostOrder(){
+        if (left != nullptr){
+            left->printPreOrder();
+        }
+        cout << data << endl;
+        if (right != nullptr){
+            right->printPreOrder();
+        }
+    }
+
+    void printBFSOrder(){
+        queue<Node*> bfs_queue;
+        bfs_queue.push(this);
+        while(!bfs_queue.empty()){
+            cout << bfs_queue.front()->data << endl;
+            bfs_queue.pop();
+
+            if (left != nullptr){
+                bfs_queue.push(left);
+            }
+            if (right != nullptr){
+                bfs_queue.push(right);
+            }
+        }
+    }
 };
 
 
@@ -84,7 +112,8 @@ int main(){
     Node* obj = new Node(55);
     obj->insert(46);
     obj->insert(77);
-    obj->insert(99);
-    obj->printPreOrder();
+    obj->insert(22);
+    obj->insert(47);
+    obj->printBFSOrder();
     return 1;
 }
