@@ -94,14 +94,15 @@ public:
         queue<Node*> bfs_queue;
         bfs_queue.push(this);
         while(!bfs_queue.empty()){
-            cout << bfs_queue.front()->data << endl;
+            Node* node = bfs_queue.front();
+            cout << node->data << endl;
             bfs_queue.pop();
 
             if (left != nullptr){
-                bfs_queue.push(left);
+                bfs_queue.push(node->left);
             }
             if (right != nullptr){
-                bfs_queue.push(right);
+                bfs_queue.push(node->right);
             }
         }
     }
@@ -114,6 +115,8 @@ int main(){
     obj->insert(77);
     obj->insert(22);
     obj->insert(47);
+    obj->insert(99);
+    obj->insert(32);
     obj->printBFSOrder();
     return 1;
 }
