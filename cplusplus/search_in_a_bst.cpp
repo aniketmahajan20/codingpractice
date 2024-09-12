@@ -12,6 +12,25 @@ struct TreeNode {
 
 class Solution {
 private:
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        if (root == NULL || val == root->val){   
+            return root;
+        }
+        // Inorder traversal of the tree 
+        // Only travel when thr returnNode value is NULL
+        if ( val < root->val){
+            return searchBST(root->left, val);
+        }
+        else {
+            return searchBST(root->right, val);
+        }
+
+    }
+};
+
+class SolutionInorder {
+private:
     TreeNode* returnNode = NULL;
 public:
     TreeNode* searchBST(TreeNode* root, int val) {
