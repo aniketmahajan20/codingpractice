@@ -13,7 +13,7 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-class Solution {
+class Solution_Recursive {
 public:
     bool isValidBST(TreeNode* root) {
         return is_valid_bst(root, NULL, NULL);
@@ -33,3 +33,21 @@ public:
     }
 };
         
+class Solution_Recursive_Inorder {
+private:
+    TreeNode* prev;
+public:
+    bool isValidBST(TreeNode* root) {
+        if (root == NULL){
+            return true;
+        }
+        if (!isValidBST(root->left)){
+            return false;
+        };
+        if (prev != NULL && root->val <= prev->val){
+            return false;
+        }
+        prev = root;
+        return isValidBST(root->right);
+    }  
+};
